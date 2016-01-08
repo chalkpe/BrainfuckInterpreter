@@ -1,9 +1,14 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity"
     android:orientation="vertical">
 
     <EditText
@@ -14,7 +19,7 @@
         android:typeface="monospace"
         android:inputType="textNoSuggestions|textImeMultiLine|text|textMultiLine"
         android:gravity="start|top"
-        android:layout_weight="1" />
+        android:layout_weight="1"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -27,7 +32,8 @@
             android:text="@string/command_plus"
             android:id="@+id/command_plus"
             android:typeface="monospace"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="onCommandButtonClick"/>
 
         <Button
             android:layout_width="0dp"
@@ -35,7 +41,8 @@
             android:text="@string/command_minus"
             android:id="@+id/command_minus"
             android:typeface="monospace"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="onCommandButtonClick"/>
 
         <Button
             android:layout_width="0dp"
@@ -43,7 +50,8 @@
             android:text="@string/command_previous"
             android:id="@+id/command_previous"
             android:typeface="monospace"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="onCommandButtonClick"/>
 
         <Button
             android:layout_width="0dp"
@@ -51,7 +59,8 @@
             android:text="@string/command_next"
             android:id="@+id/command_next"
             android:typeface="monospace"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="onCommandButtonClick"/>
 
         <Button
             android:layout_width="0dp"
@@ -59,7 +68,9 @@
             android:text="@string/command_delete"
             android:id="@+id/command_delete"
             android:typeface="monospace"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="onCommandButtonClick"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -73,7 +84,8 @@
             android:text="@string/command_output"
             android:id="@+id/command_output"
             android:typeface="monospace"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="onCommandButtonClick"/>
 
         <Button
             android:layout_width="0dp"
@@ -81,7 +93,8 @@
             android:text="@string/command_input"
             android:id="@+id/command_input"
             android:typeface="monospace"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="onCommandButtonClick"/>
 
         <Button
             android:layout_width="0dp"
@@ -89,7 +102,8 @@
             android:text="@string/command_open"
             android:id="@+id/command_open"
             android:typeface="monospace"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="onCommandButtonClick"/>
 
         <Button
             android:layout_width="0dp"
@@ -97,7 +111,8 @@
             android:text="@string/command_close"
             android:id="@+id/command_close"
             android:typeface="monospace"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="onCommandButtonClick"/>
 
         <Button
             android:layout_width="0dp"
@@ -105,7 +120,10 @@
             android:text="@string/command_enter"
             android:id="@+id/command_enter"
             android:typeface="monospace"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:onClick="onCommandButtonClick"/>
+
     </LinearLayout>
 
 </LinearLayout>
+
