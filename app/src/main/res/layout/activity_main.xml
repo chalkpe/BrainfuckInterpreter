@@ -19,109 +19,172 @@
         android:typeface="monospace"
         android:inputType="textNoSuggestions|textImeMultiLine|text|textMultiLine"
         android:gravity="start|top"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        />
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:baselineAligned="false">
 
-        <Button
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/command_plus"
-            android:id="@+id/command_plus"
-            android:typeface="monospace"
-            android:layout_weight="1"
-            android:onClick="onCommandButtonClick"/>
+            android:layout_weight="5">
 
-        <Button
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/command_plus"
+                    android:id="@+id/command_plus"
+                    android:typeface="monospace"
+                    android:layout_weight="1"
+                    android:onClick="onCommandButtonClick" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/command_minus"
+                    android:id="@+id/command_minus"
+                    android:typeface="monospace"
+                    android:layout_weight="1"
+                    android:onClick="onCommandButtonClick" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/command_previous"
+                    android:id="@+id/command_previous"
+                    android:typeface="monospace"
+                    android:layout_weight="1"
+                    android:onClick="onCommandButtonClick" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/command_next"
+                    android:id="@+id/command_next"
+                    android:typeface="monospace"
+                    android:layout_weight="1"
+                    android:onClick="onCommandButtonClick" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/command_output"
+                    android:id="@+id/command_output"
+                    android:typeface="monospace"
+                    android:layout_weight="1"
+                    android:onClick="onCommandButtonClick" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/command_input"
+                    android:id="@+id/command_input"
+                    android:typeface="monospace"
+                    android:layout_weight="1"
+                    android:onClick="onCommandButtonClick" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/command_open"
+                    android:id="@+id/command_open"
+                    android:typeface="monospace"
+                    android:layout_weight="1"
+                    android:onClick="onCommandButtonClick" />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/command_close"
+                    android:id="@+id/command_close"
+                    android:typeface="monospace"
+                    android:layout_weight="1"
+                    android:onClick="onCommandButtonClick" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_keyboard_arrow_left_white_18dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:id="@+id/command_left"
+                    android:layout_weight="1"
+                    android:onClick="onCommandButtonClick"
+                    />
+
+                <Button
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/command_space"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:id="@+id/command_space"
+                    android:typeface="monospace"
+                    android:layout_weight="2"
+                    android:onClick="onCommandButtonClick"/>
+
+                <ImageButton
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/ic_keyboard_arrow_right_white_18dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:id="@+id/command_right"
+                    android:layout_weight="1"
+                    android:onClick="onCommandButtonClick"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/command_minus"
-            android:id="@+id/command_minus"
-            android:typeface="monospace"
-            android:layout_weight="1"
-            android:onClick="onCommandButtonClick"/>
+            android:layout_height="match_parent"
+            android:layout_weight="1">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/command_previous"
-            android:id="@+id/command_previous"
-            android:typeface="monospace"
-            android:layout_weight="1"
-            android:onClick="onCommandButtonClick"/>
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_keyboard_backspace_white_18dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:id="@+id/command_backspace"
+                android:typeface="monospace"
+                android:layout_weight="1"
+                android:onClick="onCommandButtonClick"/>
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/command_next"
-            android:id="@+id/command_next"
-            android:typeface="monospace"
-            android:layout_weight="1"
-            android:onClick="onCommandButtonClick"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/command_delete"
-            android:id="@+id/command_delete"
-            android:typeface="monospace"
-            android:layout_weight="1"
-            android:onClick="onCommandButtonClick"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/command_output"
-            android:id="@+id/command_output"
-            android:typeface="monospace"
-            android:layout_weight="1"
-            android:onClick="onCommandButtonClick"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/command_input"
-            android:id="@+id/command_input"
-            android:typeface="monospace"
-            android:layout_weight="1"
-            android:onClick="onCommandButtonClick"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/command_open"
-            android:id="@+id/command_open"
-            android:typeface="monospace"
-            android:layout_weight="1"
-            android:onClick="onCommandButtonClick"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/command_close"
-            android:id="@+id/command_close"
-            android:typeface="monospace"
-            android:layout_weight="1"
-            android:onClick="onCommandButtonClick"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/command_enter"
-            android:id="@+id/command_enter"
-            android:typeface="monospace"
-            android:layout_weight="1"
-            android:onClick="onCommandButtonClick"/>
+            <ImageButton
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_keyboard_return_white_18dp"
+                android:background="?android:attr/selectableItemBackgroundBorderless"
+                android:id="@+id/command_enter"
+                android:layout_weight="1"
+                android:onClick="onCommandButtonClick"/>
+        </LinearLayout>
 
     </LinearLayout>
 

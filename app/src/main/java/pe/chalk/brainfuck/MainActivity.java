@@ -74,7 +74,7 @@ public class MainActivity extends Activity {
                 insertText("]");
                 break;
                 
-            case R.id.command_delete:
+            case R.id.command_backspace:
                 deleteText();
                 break;
                 

@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">Brainfuck Interpreter</string>
+    <string name="title_activity_run">RunActivity</string>
+
     <string name="action_settings">Settings</string>
+    <string name="action_run">Run</string>
 
     <string name="sample">++++++++[&gt;+++++&gt;++++&lt;&lt;-]&gt;.&gt;+.&lt;+.</string>
 
@@ -12,9 +15,7 @@
     <string name="command_input">,</string>
     <string name="command_open">[</string>
     <string name="command_close">]</string>
-    <string name="command_delete">BS</string>
-    <string name="command_enter">LF</string>
-    <string name="title_activity_run">RunActivity</string>
+    <string name="command_space">SPACE</string>
 
     <string name="hello_world">Hello world!</string>
 </resources>
