@@ -1,11 +1,13 @@
 package pe.chalk.brainfuck;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.*;
-import android.view.*;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * @author ChalkPE <chalkpe@gmail.com>
@@ -30,14 +32,27 @@ public class MainActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings){
-            return true;
+        switch(item.getItemId()){
+            case R.id.action_settings:
+                //TODO: Add settings page
+                return true;
+
+            case R.id.action_run:
+                if(command.length() == 0){
+                    Toast.makeText(this, R.string.error_empty, Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+
+                Intent intent = new Intent(this, RunActivity.class);
+                intent.putExtra("command", command.getText().toString());
+
+                startActivity(intent);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
     
     public void onCommandButtonClick(View v){
@@ -77,6 +92,18 @@ public class MainActivity extends Activity {
             case R.id.command_backspace:
                 deleteText();
                 break;
+
+            case R.id.command_left:
+                moveCursorHorizontally(-1);
+                break;
+
+            case R.id.command_right:
+                moveCursorHorizontally(1);
+                break;
+
+            case R.id.command_space:
+                insertText(" ");
+                break;
                 
             case R.id.command_enter:
                 insertText("\n");
@@ -97,6 +124,14 @@ public class MainActivity extends Activity {
         int start = command.getSelectionStart();
         
         if(start < 0) command.getText().delete(command.length() - 2, command.length() - 1);
-        else command.getText().delete(start - 1, start);
+        else if(start > 0) command.getText().delete(start - 1, start);
+    }
+
+    protected void moveCursorHorizontally(int step){
+        if(command == null || command.length() == 0 || step == 0) return;
+
+        int start = command.getSelectionStart();
+        if(start < 0) command.setSelection(Math.max(0, Math.min(command.length(), step)));
+        else command.setSelection(Math.max(0, Math.min(command.length(), start + step)));
     }
 }

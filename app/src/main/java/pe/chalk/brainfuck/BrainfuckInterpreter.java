@@ -24,15 +24,16 @@ public class BrainfuckInterpreter extends Thread{
         public final static char CLOSE = ']';
     }
 
-    protected List<Integer> data;
-    protected List<Character> program;
+    public final List<Integer> data;
+    public final List<Character> program;
 
-    protected int dataPointer = 0;
-    protected int programPointer = 0;
+    public int dataPointer = 0;
+    public int programPointer = 0;
 
     public InputStream in;
     public OutputStream out;
-    
+
+    @SuppressWarnings("unused")
     public BrainfuckInterpreter(String program){
         this(program.toCharArray());
     }
@@ -41,10 +42,12 @@ public class BrainfuckInterpreter extends Thread{
         this(program.toCharArray(), out);
     }
 
+    @SuppressWarnings("unused")
     public BrainfuckInterpreter(String program, InputStream in){
         this(program.toCharArray(), in);
     }
 
+    @SuppressWarnings("unused")
     public BrainfuckInterpreter(String program, OutputStream out, InputStream in){
         this(program.toCharArray(), out, in);
     }
@@ -72,10 +75,11 @@ public class BrainfuckInterpreter extends Thread{
     @Override
     public void run(){
         while(programPointer < program.size()){
+            char command = program.get(programPointer);
             for(int i = 0; i <= (dataPointer - data.size()); i++) data.add(0);
 
             try{
-                switch(program.get(programPointer)){
+                switch(command){
                     case Commands.NEXT:
                         dataPointer++;
                         break;
@@ -104,9 +108,9 @@ public class BrainfuckInterpreter extends Thread{
                         if(data.get(dataPointer) == 0){
                             int level = 1;
                             while(level > 0){
-                                char command = program.get(++programPointer);
-                                if(command == Commands.OPEN) level++;
-                                else if(command == Commands.CLOSE) level--;
+                                char thatCommand = program.get(++programPointer);
+                                if(thatCommand == Commands.OPEN) level++;
+                                else if(thatCommand == Commands.CLOSE) level--;
                             }
                         }
                         break;
@@ -115,42 +119,31 @@ public class BrainfuckInterpreter extends Thread{
                         if(data.get(dataPointer) != 0){
                             int level = 1;
                             while(level > 0){
-                                char command = program.get(--programPointer);
-                                if(command == Commands.CLOSE) level++;
-                                else if(command == Commands.OPEN) level--;
+                                char thatCommand = program.get(--programPointer);
+                                if(thatCommand == Commands.CLOSE) level++;
+                                else if(thatCommand == Commands.OPEN) level--;
                             }
                             programPointer--;
                         }
                         break;
                 }
-
-                programPointer++;
             }catch(IOException e){
                 e.printStackTrace();
+            }finally{
+                onCommand(command);
+                programPointer++;
             }
+
         }
+
+        onFinished();
     }
 
-    public static void main(String[] args) throws IOException {
-        BrainfuckInterpreter interpreter = new BrainfuckInterpreter(
-                "+++++ ++ [>>>>> >>>>>\n" +
-                "    +++++ ++ > +++++\n" +
-                "<<<<< <<<<< <-] >>>>> >>>>> - > --- <<<<< <<<<< <\n" +
-                "\n" +
-                "+++++ +++++ [>\n" +
-                "    +++++ +++++ + [>\n" +
-                "        + > +++ > ++++ > +++++ ++ > +++++ ++++ >\n" +
-                "        +++++ +++++ > +++++ +++++ +\n" +
-                "    <<<<<<<-]\n" +
-                "\n" +
-                "    >\n" +
-                "        >>>>> >>> .+ >. < <<<<< <<<\n" +
-                "        >>> -----. > ++. > --.. +++. <<< . < -.\n" +
-                "        >>>>> --. <. +++. ----- -. < -. <<< +. < ++. ---.\n" +
-                "    <\n" +
-                "    \n" +
-                "    [-] > [-] > [-] > [-] > [-] > [-] > [-] > [-] <<<<< <<\n" +
-                "<-]");
-        interpreter.start();
+    public void onCommand(@SuppressWarnings("unused") char command){
+        //NOTHING TO DO
+    }
+
+    public void onFinished(){
+        //NOTHING TO DO
     }
 }

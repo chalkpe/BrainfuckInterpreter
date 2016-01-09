@@ -22,7 +22,7 @@
         android:background="@null"
         android:nestedScrollingEnabled="true"
         android:padding="8dp"
-        android:textSize="15dp"/>
+        android:textSize="15sp"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -60,7 +60,7 @@
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="6">
+            android:layout_weight="5">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -201,7 +201,7 @@
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:id="@+id/command_space"
             android:typeface="monospace"
-            android:layout_weight="6"
+            android:layout_weight="5"
             android:onClick="onCommandButtonClick"/>
 
         <ImageButton
