@@ -18,6 +18,9 @@
     <string name="command_close">]</string>
     <string name="command_space">SPACE</string>
 
+    <string name="card_index" formatted="false">#%%0%dd</string>
+    <string name="card_value" formatted="false">%%0%dd (0x%%0%dX)</string>
+
     <string name="hello_world">Hello world!</string>
     <string name="error_empty">Nothing to run</string>
 </resources>
