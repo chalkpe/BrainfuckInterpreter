@@ -129,7 +129,7 @@ public class RunActivity extends Activity {
         console.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(final View v){
-                ((ClipboardManager) RunActivity.this.getSystemService(CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("brainfuck console output", console.getText().toString()));
+                ((ClipboardManager) RunActivity.this.getSystemService(CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("Brainfuck console output", console.getText().toString()));
                 Toast.makeText(RunActivity.this, R.string.toast_copied, Toast.LENGTH_SHORT).show();
             }
         });

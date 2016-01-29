@@ -99,6 +99,14 @@ public class MainActivity extends Activity {
             case R.id.command_enter:
                 insertText("\n");
                 break;
+
+            case R.id.command_up:
+                //TODO: Implement this feature
+                break;
+
+            case R.id.command_down:
+                //TODO: Implement this feature
+                break;
         }
     }
 
@@ -138,7 +146,7 @@ public class MainActivity extends Activity {
     }
 
     public boolean run(){
-        if(command.length() == 0){
+        if(command.length() <= 0){
             Toast.makeText(this, R.string.error_empty, Toast.LENGTH_SHORT).show();
             return false;
         }
