@@ -28,16 +28,16 @@ public class RunActivity extends Activity {
 
     public static class OutHandler extends Handler {
         private final TextView out;
-        public OutHandler(TextView out){
+        public OutHandler(final TextView out){
             this.out = out;
         }
 
         @Override
-        public void handleMessage(Message msg){
+        public void handleMessage(final Message msg){
             super.handleMessage(msg);
             if(msg.what == 2016 && out != null && msg.obj instanceof CharSequence) out.append((CharSequence) msg.obj);
             else if(msg.what == 2015){
-                RecyclerView memory = (RecyclerView) RunActivity.instance.findViewById(R.id.memory);
+                final RecyclerView memory = (RecyclerView) RunActivity.instance.findViewById(R.id.memory);
                 memory.setLayoutManager(new LinearLayoutManager(RunActivity.instance, LinearLayoutManager.VERTICAL, false));
                 memory.setAdapter(new DataAdapter(RunActivity.instance.interpreter.data, RunActivity.instance.interpreter.dataPointer));
             }
@@ -45,11 +45,11 @@ public class RunActivity extends Activity {
     }
 
     public static class DataHolder extends RecyclerView.ViewHolder {
-        protected CardView root;
-        protected TextView index;
-        protected TextView value;
+        final protected CardView root;
+        final protected TextView index;
+        final protected TextView value;
 
-        public DataHolder(View itemView){
+        public DataHolder(final View itemView){
             super(itemView);
 
             root = (CardView) itemView;
@@ -64,7 +64,7 @@ public class RunActivity extends Activity {
 
         protected String indexFormat, valueFormat;
 
-        public DataAdapter(List<Integer> data, int selected){
+        public DataAdapter(final List<Integer> data, final int selected){
             this.data = data;
             this.selected = selected;
 
@@ -85,13 +85,13 @@ public class RunActivity extends Activity {
         }
 
         @Override
-        public DataHolder onCreateViewHolder(ViewGroup parent, int viewType){
+        public DataHolder onCreateViewHolder(final ViewGroup parent, final int viewType){
             return new DataHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_data, parent, false));
         }
 
         @Override
-        public void onBindViewHolder(DataHolder holder, int position){
-            int value = this.data.get(position);
+        public void onBindViewHolder(final DataHolder holder, final int position){
+            final int value = this.data.get(position);
 
             holder.index.setText(String.format(this.indexFormat, position));
             holder.value.setText(String.format(this.valueFormat, value, value));
@@ -109,49 +109,50 @@ public class RunActivity extends Activity {
 
     protected final OutputStream output = new OutputStream(){
         @Override
-        public void write(int oneByte) throws IOException {
+        public void write(final int oneByte) throws IOException {
             handler.sendMessage(Message.obtain(handler, 2016, String.valueOf((char) oneByte)));
         }
     };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(final Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_run);
+        this.setContentView(R.layout.activity_run);
 
         RunActivity.instance = this;
-        if(getActionBar() != null) getActionBar().setDisplayHomeAsUpEnabled(true);
+        if(this.getActionBar() != null) this.getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        Bundle extras = getIntent().getExtras();
+        final TextView console = (TextView) findViewById(R.id.console);
+
+        final Bundle extras = getIntent().getExtras();
         if(extras.containsKey("command")){
-            handler = new OutHandler((TextView) findViewById(R.id.console));
-            interpreter = new BrainfuckInterpreter(extras.getString("command"), output){
+            this.handler = new OutHandler(console);
+            this.interpreter = new BrainfuckInterpreter(extras.getString("command"), this.output){
                 @Override
                 public void onFinished(){
                     handler.sendMessage(Message.obtain(handler, 2016, Html.fromHtml("<br><i>[Finished]</i>")));
                     handler.sendEmptyMessage(2015);
                 }
             };
-            interpreter.start();
+            this.interpreter.start();
         }
     }
 
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_run, menu);
-        return true;
-    }*/
-
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home:
-                if(interpreter != null) interpreter.interrupt();
-                finish();
+                this.finish();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        if(this.interpreter != null) this.interpreter.interrupt();
     }
 }

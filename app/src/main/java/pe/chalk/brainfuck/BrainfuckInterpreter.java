@@ -34,37 +34,37 @@ public class BrainfuckInterpreter extends Thread{
     public OutputStream out;
 
     @SuppressWarnings("unused")
-    public BrainfuckInterpreter(String program){
+    public BrainfuckInterpreter(final String program){
         this(program.toCharArray());
     }
 
-    public BrainfuckInterpreter(String program, OutputStream out){
+    public BrainfuckInterpreter(final String program, final OutputStream out){
         this(program.toCharArray(), out);
     }
 
     @SuppressWarnings("unused")
-    public BrainfuckInterpreter(String program, InputStream in){
+    public BrainfuckInterpreter(final String program, final InputStream in){
         this(program.toCharArray(), in);
     }
 
     @SuppressWarnings("unused")
-    public BrainfuckInterpreter(String program, OutputStream out, InputStream in){
+    public BrainfuckInterpreter(final String program, final OutputStream out, final InputStream in){
         this(program.toCharArray(), out, in);
     }
 
-    public BrainfuckInterpreter(char[] program){
+    public BrainfuckInterpreter(final char[] program){
         this(program, System.out, System.in);
     }
 
-    public BrainfuckInterpreter(char[] program, OutputStream out){
+    public BrainfuckInterpreter(final char[] program, final OutputStream out){
         this(program, out, System.in);
     }
 
-    public BrainfuckInterpreter(char[] program, InputStream in){
+    public BrainfuckInterpreter(final char[] program, final InputStream in){
         this(program, System.out, in);
     }
 
-    public BrainfuckInterpreter(char[] program, OutputStream out, InputStream in){
+    public BrainfuckInterpreter(final char[] program, final OutputStream out, final InputStream in){
         this.program = new ArrayList<>(program.length);
         for(char command: program) if(Commands.COMMANDS.indexOf(command) > -1) this.program.add(command);
 
@@ -75,7 +75,7 @@ public class BrainfuckInterpreter extends Thread{
     @Override
     public void run(){
         while(programPointer < program.size()){
-            char command = program.get(programPointer);
+            final char command = program.get(programPointer);
             for(int i = 0; i <= (dataPointer - data.size()); i++) data.add(0);
 
             try{
@@ -108,7 +108,7 @@ public class BrainfuckInterpreter extends Thread{
                         if(data.get(dataPointer) == 0){
                             int level = 1;
                             while(level > 0){
-                                char thatCommand = program.get(++programPointer);
+                                final char thatCommand = program.get(++programPointer);
                                 if(thatCommand == Commands.OPEN) level++;
                                 else if(thatCommand == Commands.CLOSE) level--;
                             }
@@ -119,7 +119,7 @@ public class BrainfuckInterpreter extends Thread{
                         if(data.get(dataPointer) != 0){
                             int level = 1;
                             while(level > 0){
-                                char thatCommand = program.get(--programPointer);
+                                final char thatCommand = program.get(--programPointer);
                                 if(thatCommand == Commands.CLOSE) level++;
                                 else if(thatCommand == Commands.OPEN) level--;
                             }
@@ -130,16 +130,16 @@ public class BrainfuckInterpreter extends Thread{
             }catch(IOException e){
                 e.printStackTrace();
             }finally{
-                onCommand(command);
+                this.onCommand(command);
                 programPointer++;
             }
 
         }
 
-        onFinished();
+        this.onFinished();
     }
 
-    public void onCommand(@SuppressWarnings("unused") char command){
+    public void onCommand(@SuppressWarnings("unused") final char command){
         //NOTHING TO DO
     }
 

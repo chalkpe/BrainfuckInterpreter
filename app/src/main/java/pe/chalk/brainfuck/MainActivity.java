@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
     protected EditText command;
     
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(final Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         
@@ -25,37 +25,27 @@ public class MainActivity extends Activity {
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu){
+    public boolean onCreateOptionsMenu(final Menu menu){
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-
+    public boolean onOptionsItemSelected(final MenuItem item){
         switch(item.getItemId()){
             case R.id.action_settings:
                 //TODO: Add settings page
                 return true;
 
             case R.id.action_run:
-                if(command.length() == 0){
-                    Toast.makeText(this, R.string.error_empty, Toast.LENGTH_SHORT).show();
-                    return false;
-                }
-
-                Intent intent = new Intent(this, RunActivity.class);
-                intent.putExtra("command", command.getText().toString());
-
-                startActivity(intent);
-                return true;
+                return this.run();
 
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
     
-    public void onCommandButtonClick(View v){
+    public void onCommandButtonClick(final View v){
         switch(v.getId()){
             case R.id.command_plus:
                 insertText("+");
@@ -110,10 +100,10 @@ public class MainActivity extends Activity {
                 break;
         }
     }
-    
-    protected void insertText(String text){
+
+    protected void insertText(final String text){
         if(command == null) return;
-        int start = command.getSelectionStart();
+        final int start = command.getSelectionStart();
         
         if(start < 0) command.getText().append(text);
         else command.getText().insert(start, text);
@@ -121,17 +111,30 @@ public class MainActivity extends Activity {
     
     protected void deleteText(){
         if(command == null || command.length() == 0) return;
-        int start = command.getSelectionStart();
+        final int start = command.getSelectionStart();
         
         if(start < 0) command.getText().delete(command.length() - 2, command.length() - 1);
         else if(start > 0) command.getText().delete(start - 1, start);
     }
 
-    protected void moveCursorHorizontally(int step){
+    protected void moveCursorHorizontally(final int step){
         if(command == null || command.length() == 0 || step == 0) return;
 
-        int start = command.getSelectionStart();
+        final int start = command.getSelectionStart();
         if(start < 0) command.setSelection(Math.max(0, Math.min(command.length(), step)));
         else command.setSelection(Math.max(0, Math.min(command.length(), start + step)));
+    }
+
+    public boolean run(){
+        if(command.length() == 0){
+            Toast.makeText(this, R.string.error_empty, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        final Intent intent = new Intent(this, RunActivity.class);
+        intent.putExtra("command", command.getText().toString());
+
+        startActivity(intent);
+        return true;
     }
 }

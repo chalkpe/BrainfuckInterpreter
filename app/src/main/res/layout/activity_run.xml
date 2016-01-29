@@ -28,7 +28,8 @@
             android:id="@+id/console"
             android:typeface="monospace"
             android:gravity="start|top"
-            android:background="@null"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
             android:padding="8dp"
             android:textSize="15sp" />
     </ScrollView>
