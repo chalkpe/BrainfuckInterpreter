@@ -22,5 +22,7 @@
     <string name="card_value" formatted="false">%%0%dd (0x%%0%dX)</string>
 
     <string name="hello_world">Hello world!</string>
+
     <string name="error_empty">Nothing to run</string>
+    <string name="toast_copied">Copied to clipboard</string>
 </resources>

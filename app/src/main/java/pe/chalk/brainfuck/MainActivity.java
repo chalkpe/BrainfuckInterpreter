@@ -3,6 +3,7 @@ package pe.chalk.brainfuck;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -99,6 +100,17 @@ public class MainActivity extends Activity {
                 insertText("\n");
                 break;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event){
+        super.onKeyDown(keyCode, event);
+
+        switch(keyCode){
+            case KeyEvent.KEYCODE_F5:
+                return this.run();
+        }
+        return false;
     }
 
     protected void insertText(final String text){

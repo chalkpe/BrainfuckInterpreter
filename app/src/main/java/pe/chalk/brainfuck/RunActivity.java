@@ -1,6 +1,8 @@
 package pe.chalk.brainfuck;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -123,6 +126,13 @@ public class RunActivity extends Activity {
         if(this.getActionBar() != null) this.getActionBar().setDisplayHomeAsUpEnabled(true);
 
         final TextView console = (TextView) findViewById(R.id.console);
+        console.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(final View v){
+                ((ClipboardManager) RunActivity.this.getSystemService(CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("brainfuck console output", console.getText().toString()));
+                Toast.makeText(RunActivity.this, R.string.toast_copied, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         final Bundle extras = getIntent().getExtras();
         if(extras.containsKey("command")){
